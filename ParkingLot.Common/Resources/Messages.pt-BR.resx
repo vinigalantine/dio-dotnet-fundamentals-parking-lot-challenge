@@ -3,4 +3,34 @@
   <data name="WelcomeMessage" xml:space="preserve">
     <value>Bem-vindo(a) ao sistema de estacionamento!</value>
   </data>
+  <data name="PromptInitialPrice" xml:space="preserve">
+    <value>Digite o preço inicial:</value>
+  </data>
+  <data name="PromptPricePerHour" xml:space="preserve">
+    <value>Agora digite o preço por hora:</value>
+  </data>
+  <data name="MenuPrompt" xml:space="preserve">
+    <value>Digite a sua opção:</value>
+  </data>
+  <data name="MenuOptionAdd" xml:space="preserve">
+    <value>1 - Cadastrar veículo</value>
+  </data>
+  <data name="MenuOptionRemove" xml:space="preserve">
+    <value>2 - Remover veículo</value>
+  </data>
+  <data name="MenuOptionList" xml:space="preserve">
+    <value>3 - Listar veículos</value>
+  </data>
+  <data name="MenuOptionExit" xml:space="preserve">
+    <value>4 - Encerrar</value>
+  </data>
+  <data name="MenuInvalidOption" xml:space="preserve">
+    <value>Opção inválida</value>
+  </data>
+  <data name="PressAnyKey" xml:space="preserve">
+    <value>Pressione uma tecla para continuar</value>
+  </data>
+  <data name="GoodbyeMessage" xml:space="preserve">
+    <value>O programa se encerrou</value>
+  </data>
 </root>

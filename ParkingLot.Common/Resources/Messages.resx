@@ -3,4 +3,34 @@
   <data name="WelcomeMessage" xml:space="preserve">
     <value>Welcome to Parking Lot!</value>
   </data>
+  <data name="PromptInitialPrice" xml:space="preserve">
+    <value>Enter the initial price:</value>
+  </data>
+  <data name="PromptPricePerHour" xml:space="preserve">
+    <value>Now enter the price per hour:</value>
+  </data>
+  <data name="MenuPrompt" xml:space="preserve">
+    <value>Enter your option:</value>
+  </data>
+  <data name="MenuOptionAdd" xml:space="preserve">
+    <value>1 - Register vehicle</value>
+  </data>
+  <data name="MenuOptionRemove" xml:space="preserve">
+    <value>2 - Remove vehicle</value>
+  </data>
+  <data name="MenuOptionList" xml:space="preserve">
+    <value>3 - List vehicles</value>
+  </data>
+  <data name="MenuOptionExit" xml:space="preserve">
+    <value>4 - Exit</value>
+  </data>
+  <data name="MenuInvalidOption" xml:space="preserve">
+    <value>Invalid option</value>
+  </data>
+  <data name="PressAnyKey" xml:space="preserve">
+    <value>Press any key to continue</value>
+  </data>
+  <data name="GoodbyeMessage" xml:space="preserve">
+    <value>The program has ended</value>
+  </data>
 </root>
