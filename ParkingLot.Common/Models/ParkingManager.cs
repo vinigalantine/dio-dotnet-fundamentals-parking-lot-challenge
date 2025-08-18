@@ -1,23 +1,54 @@
+using ParkingLot.Common.Interfaces;
+using ParkingLot.Common.Services;
+
 namespace ParkingLot.Common.Models;
 
 public class ParkingManager
 {
+    private IUserInputOutput userInputOutput;
+
+    private readonly MessageService messageService;
     private decimal initialPrice = 0;
     private decimal pricePerHour = 0;
     private List<string> vehicles = new List<string>();
 
-    public ParkingManager(decimal initialPrice, decimal pricePerHour)
+    public ParkingManager(IUserInputOutput userInputOutput, MessageService messageService, decimal initialPrice, decimal pricePerHour)
     {
+        this.userInputOutput = userInputOutput;
+        this.messageService = messageService;
         this.initialPrice = initialPrice;
         this.pricePerHour = pricePerHour;
     }
 
     public void AddVehicle()
     {
-        // TODO: [EN] Ask the user to enter a license plate (ReadLine) and add it to the "vehicles" list
-        // TODO: [PT-BR] Pedir para o usuário digitar uma placa (ReadLine) e adicionar na lista "vehicles"
-        // *IMPLEMENTE AQUI*
-        Console.WriteLine("Digite a placa do veículo para estacionar:");
+        string? licensePlate = null;
+        while (string.IsNullOrEmpty(licensePlate))
+        {
+            Console.Clear();
+            userInputOutput.WriteLine(messageService.GetMessage("AskForVehicleLicensePlateToPark"));
+            userInputOutput.WriteLine(messageService.GetMessage("LeaveOption", "-"));
+            licensePlate = userInputOutput.ReadLine().Trim();
+
+            if (string.IsNullOrEmpty(licensePlate) || licensePlate == "")
+            {
+                userInputOutput.WriteLine(messageService.GetMessage("PleaseInformTheLicensePlateCorrectly"));
+                Thread.Sleep(1500);
+            }
+            else if (licensePlate == "-")
+            {
+                userInputOutput.WriteLine(messageService.GetMessage("Returning"));
+                return;
+            }
+            else if (vehicles.Any(vehicles => vehicles == licensePlate))
+            {
+                userInputOutput.WriteLine(messageService.GetMessage("LicensePlateAlreadyParked"));
+                Thread.Sleep(1500);
+                licensePlate = null;
+            }
+        }
+        vehicles.Add(licensePlate);
+        userInputOutput.WriteLine(messageService.GetMessage("VehicleParkedSuccessfully"));
     }
 
     public void RemoveVehicle()

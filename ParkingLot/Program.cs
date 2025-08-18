@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using System.Resources;
+using ParkingLot.Common;
 using ParkingLot.Common.Models;
 using ParkingLot.Common.Services;
 
@@ -11,6 +12,7 @@ bool showLanguageMenu = true;
 
 while (showLanguageMenu)
 {
+    Console.Clear();
     Console.WriteLine("Choose your language | Escolha o idioma:");
     Console.WriteLine("1 - Português Brasileiro");
     Console.WriteLine("2 - English");
@@ -48,7 +50,7 @@ Console.WriteLine(messageService.GetMessage("PromptPricePerHour"));
 pricePerHour = Convert.ToDecimal(Console.ReadLine());
 
 // Instancia a classe Estacionamento, já com os valores obtidos anteriormente
-ParkingManager parkingManager = new ParkingManager(initialPrice, pricePerHour);
+ParkingManager parkingManager = new ParkingManager(new UserInputOutput(), messageService, initialPrice, pricePerHour);
 
 bool showMenu = true;
 

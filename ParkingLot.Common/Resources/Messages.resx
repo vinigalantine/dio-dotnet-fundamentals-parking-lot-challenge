@@ -33,4 +33,22 @@
   <data name="GoodbyeMessage" xml:space="preserve">
     <value>The program has ended</value>
   </data>
+  <data name="AskForVehicleLicensePlateToPark" xml:space="preserve">
+    <value>Enter the license plate of the vehicle to park:</value>
+  </data>
+  <data name="LeaveOption" xml:space="preserve">
+    <value>(Or use {0} to go back)</value>
+  </data>
+  <data name="PleaseInformTheLicensePlateCorrectly" xml:space="preserve">
+    <value>Invalid input, please provide a valid license plate</value>
+  </data>
+  <data name="LicensePlateAlreadyParked" xml:space="preserve">
+    <value>The vehicle with the provided license plate is already parked</value>
+  </data>
+  <data name="VehicleParkedSuccessfully" xml:space="preserve">
+    <value>The vehicle has been parked successfully!</value>
+  </data>
+  <data name="Returning" xml:space="preserve">
+    <value>Returning...</value>
+  </data>
 </root>

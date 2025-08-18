@@ -33,4 +33,22 @@
   <data name="GoodbyeMessage" xml:space="preserve">
     <value>O programa se encerrou</value>
   </data>
+  <data name="AskForVehicleLicensePlateToPark" xml:space="preserve">
+    <value>Digite a placa do veículo para estacionar:</value>
+  </data>
+  <data name="LeaveOption" xml:space="preserve">
+    <value>(Ou use {0} para voltar)</value>
+  </data>
+  <data name="PleaseInformTheLicensePlateCorrectly" xml:space="preserve">
+    <value>Input inválido, por favor forneça uma placa:</value>
+  </data>
+  <data name="LicensePlateAlreadyParked" xml:space="preserve">
+    <value>O veículo com a placa informada já se encontra no estacionamento</value>
+  </data>
+  <data name="VehicleParkedSuccessfully" xml:space="preserve">
+    <value>O veículo foi estacionado com sucesso!</value>
+  </data>
+  <data name="Returning" xml:space="preserve">
+    <value>Retornando...</value>
+  </data>
 </root>
