@@ -51,4 +51,10 @@
   <data name="Returning" xml:space="preserve">
     <value>Returning...</value>
   </data>
+  <data name="AskForVehicleLicensePlateToRemove" xml:space="preserve">
+    <value>Enter the license plate of the vehicle to remove:</value>
+  </data>
+  <data name="VehicleNotFound" xml:space="preserve">
+    <value>Sorry, this vehicle is not parked here. Please check if you entered the license plate correctly.</value>
+  </data>
 </root>

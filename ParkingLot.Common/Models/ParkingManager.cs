@@ -28,7 +28,7 @@ public class ParkingManager
             Console.Clear();
             userInputOutput.WriteLine(messageService.GetMessage("AskForVehicleLicensePlateToPark"));
             userInputOutput.WriteLine(messageService.GetMessage("LeaveOption", "-"));
-            licensePlate = userInputOutput.ReadLine().Trim();
+            licensePlate = userInputOutput.ReadLine().ToUpper().Trim();
 
             if (string.IsNullOrEmpty(licensePlate) || licensePlate == "")
             {
@@ -53,17 +53,37 @@ public class ParkingManager
 
     public void RemoveVehicle()
     {
-        Console.WriteLine("Digite a placa do veículo para remover:");
-
-        // TODO: [EN] Ask the user to enter the license plate and store it in the variable 'placa'
-        // *IMPLEMENT HERE*
-        // TODO: [PT-BR] Pedir para o usuário digitar a placa e armazenar na variável placa
-        // *IMPLEMENTE AQUI*
-        string licensePlate = "";
-
-        if (vehicles.Any(x => x.ToUpper() == licensePlate.ToUpper()))
+        string? licensePlate = null;
+        while (string.IsNullOrEmpty(licensePlate))
         {
-            Console.WriteLine("Digite a quantidade de horas que o veículo permaneceu estacionado:");
+            userInputOutput.WriteLine(messageService.GetMessage("AskForVehicleLicensePlateToRemove"));
+            licensePlate = userInputOutput.ReadLine();
+
+            if (string.IsNullOrEmpty(licensePlate) || licensePlate == "")
+            {
+                userInputOutput.WriteLine(messageService.GetMessage("PleaseInformTheLicensePlateCorrectly"));
+                Thread.Sleep(1500);
+            }
+            else if (licensePlate == "-")
+            {
+                userInputOutput.WriteLine(messageService.GetMessage("Returning"));
+                return;
+            }
+            else if (!vehicles.Any(x => x == licensePlate.ToUpper()))
+            {
+                userInputOutput.WriteLine(messageService.GetMessage("VehicleNotFound"));
+                Thread.Sleep(1500);
+                licensePlate = null;
+            }
+        }
+        // TODO: [EN] Ask the user to enter the license plate and store it in the variable 'placa'
+            // *IMPLEMENT HERE*
+            // TODO: [PT-BR] Pedir para o usuário digitar a placa e armazenar na variável placa
+            // *IMPLEMENTE AQUI*
+
+        // if ()
+        // {
+            // Console.WriteLine("Digite a quantidade de horas que o veículo permaneceu estacionado:");
 
             // TODO: [EN] Ask the user to enter the number of hours the vehicle was parked,
             // TODO: [EN] Perform the following calculation: "initialPrice + pricePerHour * hours" for the variable totalValue
@@ -71,20 +91,20 @@ public class ParkingManager
             // TODO: [PT-BR] Pedir para o usuário digitar a quantidade de horas que o veículo permaneceu estacionado,
             // TODO: [PT-BR] Realizar o seguinte cálculo: "initialPrice + pricePerHour * hours" para a variável valorTotal                
             // *IMPLEMENTE AQUI*
-            int hours = 0;
-            decimal valorTotal = 0;
+            // int hours = 0;
+            // decimal valorTotal = 0;
 
             // TODO: [EN] Remove the entered license plate from the list of vehicles
             // *IMPLEMENT HERE*
             // TODO: [PT-BR] Remover a placa digitada da lista de veículos
             // *IMPLEMENTE AQUI*
 
-            Console.WriteLine($"O veículo {licensePlate} foi removido e o preço total foi de: R$ {valorTotal}");
-        }
-        else
-        {
-            Console.WriteLine("Desculpe, esse veículo não está estacionado aqui. Confira se digitou a placa corretamente");
-        }
+            // Console.WriteLine($"O veículo {licensePlate} foi removido e o preço total foi de: R$ {valorTotal}");
+        // }
+        // else
+        // {
+            // Console.WriteLine("Desculpe, esse veículo não está estacionado aqui. Confira se digitou a placa corretamente");
+        // }
     }
 
     public void ListVehicles()
