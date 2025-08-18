@@ -76,35 +76,25 @@ public class ParkingManager
                 licensePlate = null;
             }
         }
-        // TODO: [EN] Ask the user to enter the license plate and store it in the variable 'placa'
-            // *IMPLEMENT HERE*
-            // TODO: [PT-BR] Pedir para o usuário digitar a placa e armazenar na variável placa
-            // *IMPLEMENTE AQUI*
 
-        // if ()
-        // {
-            // Console.WriteLine("Digite a quantidade de horas que o veículo permaneceu estacionado:");
-
-            // TODO: [EN] Ask the user to enter the number of hours the vehicle was parked,
-            // TODO: [EN] Perform the following calculation: "initialPrice + pricePerHour * hours" for the variable totalValue
-            // *IMPLEMENT HERE*
-            // TODO: [PT-BR] Pedir para o usuário digitar a quantidade de horas que o veículo permaneceu estacionado,
-            // TODO: [PT-BR] Realizar o seguinte cálculo: "initialPrice + pricePerHour * hours" para a variável valorTotal                
-            // *IMPLEMENTE AQUI*
-            // int hours = 0;
-            // decimal valorTotal = 0;
-
-            // TODO: [EN] Remove the entered license plate from the list of vehicles
-            // *IMPLEMENT HERE*
-            // TODO: [PT-BR] Remover a placa digitada da lista de veículos
-            // *IMPLEMENTE AQUI*
-
-            // Console.WriteLine($"O veículo {licensePlate} foi removido e o preço total foi de: R$ {valorTotal}");
-        // }
-        // else
-        // {
-            // Console.WriteLine("Desculpe, esse veículo não está estacionado aqui. Confira se digitou a placa corretamente");
-        // }
+        int? hours = null;
+        while (hours != null)
+        {
+            userInputOutput.WriteLine(messageService.GetMessage("AskHowManyHoursVehicleIsParked"));
+            try
+            {
+                hours = int.Parse(userInputOutput.ReadLine());
+            }
+            catch (FormatException e)
+            {
+                userInputOutput.WriteLine(messageService.GetMessage("PleaseProvideTheHoursCorrectly"));
+                hours = null;
+                continue;
+            }
+        }
+        vehicles.Remove(licensePlate);
+        decimal total = this.initialPrice + (decimal) hours * this.pricePerHour;
+        userInputOutput.WriteLine(messageService.GetMessage("VehicleRemovedAndTotalatoPay"));
     }
 
     public void ListVehicles()
