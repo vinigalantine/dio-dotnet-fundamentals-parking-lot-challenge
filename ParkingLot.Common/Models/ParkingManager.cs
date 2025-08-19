@@ -102,15 +102,14 @@ public class ParkingManager
     {
         if (vehicles.Any())
         {
-            Console.WriteLine("Os veículos estacionados são:");
-            // TODO: [EN] Loop through and display the parked vehicles
-            // *IMPLEMENT HERE*
-            // TODO: [PT-BR] Realizar um laço de repetição, exibindo os veículos estacionados
-            // *IMPLEMENTE AQUI*
+            userInputOutput.WriteLine("TheseAreTheVehiclesParkedHere");
+            foreach(string vehicle in this.vehicles){
+                userInputOutput.WriteLine(vehicle);
+            }
         }
         else
         {
-            Console.WriteLine("Não há veículos estacionados.");
+            userInputOutput.WriteLine("NoVehiclesParkedHere");
         }
     }
 }
