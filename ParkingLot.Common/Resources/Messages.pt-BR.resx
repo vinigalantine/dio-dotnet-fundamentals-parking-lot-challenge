@@ -3,4 +3,67 @@
   <data name="WelcomeMessage" xml:space="preserve">
     <value>Bem-vindo(a) ao sistema de estacionamento!</value>
   </data>
+  <data name="PromptInitialPrice" xml:space="preserve">
+    <value>Digite o preço inicial:</value>
+  </data>
+  <data name="PromptPricePerHour" xml:space="preserve">
+    <value>Agora digite o preço por hora:</value>
+  </data>
+  <data name="MenuPrompt" xml:space="preserve">
+    <value>Digite a sua opção:</value>
+  </data>
+  <data name="MenuOptionAdd" xml:space="preserve">
+    <value>1 - Cadastrar veículo</value>
+  </data>
+  <data name="MenuOptionRemove" xml:space="preserve">
+    <value>2 - Remover veículo</value>
+  </data>
+  <data name="MenuOptionList" xml:space="preserve">
+    <value>3 - Listar veículos</value>
+  </data>
+  <data name="MenuOptionExit" xml:space="preserve">
+    <value>4 - Encerrar</value>
+  </data>
+  <data name="MenuInvalidOption" xml:space="preserve">
+    <value>Opção inválida</value>
+  </data>
+  <data name="PressAnyKey" xml:space="preserve">
+    <value>Pressione uma tecla para continuar</value>
+  </data>
+  <data name="GoodbyeMessage" xml:space="preserve">
+    <value>O programa se encerrou</value>
+  </data>
+  <data name="AskForVehicleLicensePlateToPark" xml:space="preserve">
+    <value>Digite a placa do veículo para estacionar:</value>
+  </data>
+  <data name="LeaveOption" xml:space="preserve">
+    <value>(Ou use {0} para voltar)</value>
+  </data>
+  <data name="PleaseInformTheLicensePlateCorrectly" xml:space="preserve">
+    <value>Input inválido, por favor forneça uma placa:</value>
+  </data>
+  <data name="LicensePlateAlreadyParked" xml:space="preserve">
+    <value>O veículo com a placa informada já se encontra no estacionamento</value>
+  </data>
+  <data name="VehicleParkedSuccessfully" xml:space="preserve">
+    <value>O veículo foi estacionado com sucesso!</value>
+  </data>
+  <data name="Returning" xml:space="preserve">
+    <value>Retornando...</value>
+  </data>
+  <data name="AskForVehicleLicensePlateToRemove" xml:space="preserve">
+    <value>Digite a placa do veículo para remover:</value>
+  </data>
+  <data name="VehicleNotFound" xml:space="preserve">
+    <value>Desculpe, esse veículo não está estacionado aqui. Confira se digitou a placa corretamente.</value>
+  </data>
+  <data name="AskHowManyHoursVehicleIsParked" xml:space="preserve">
+    <value>Informe a quantidade de horas que o veículo permaneceu estacionado:</value>
+  </data>
+  <data name="PleaseProvideTheHoursCorrectly" xml:space="preserve">
+    <value>Por favor forneça as horas corretamente</value>
+  </data>
+  <data name="VehicleRemovedAndTotalatoPay" xml:space="preserve">
+    <value>O veículo de placa {0} foi removido e o preço total foi de: R$ {1}</value>
+  </data>
 </root>

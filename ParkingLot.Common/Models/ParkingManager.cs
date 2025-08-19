@@ -1,59 +1,101 @@
+using ParkingLot.Common.Interfaces;
+using ParkingLot.Common.Services;
+
 namespace ParkingLot.Common.Models;
 
 public class ParkingManager
 {
+    private IUserInputOutput userInputOutput;
+
+    private readonly MessageService messageService;
     private decimal initialPrice = 0;
     private decimal pricePerHour = 0;
     private List<string> vehicles = new List<string>();
 
-    public ParkingManager(decimal initialPrice, decimal pricePerHour)
+    public ParkingManager(IUserInputOutput userInputOutput, MessageService messageService, decimal initialPrice, decimal pricePerHour)
     {
+        this.userInputOutput = userInputOutput;
+        this.messageService = messageService;
         this.initialPrice = initialPrice;
         this.pricePerHour = pricePerHour;
     }
 
     public void AddVehicle()
     {
-        // TODO: [EN] Ask the user to enter a license plate (ReadLine) and add it to the "vehicles" list
-        // TODO: [PT-BR] Pedir para o usuário digitar uma placa (ReadLine) e adicionar na lista "vehicles"
-        // *IMPLEMENTE AQUI*
-        Console.WriteLine("Digite a placa do veículo para estacionar:");
+        string? licensePlate = null;
+        while (string.IsNullOrEmpty(licensePlate))
+        {
+            Console.Clear();
+            userInputOutput.WriteLine(messageService.GetMessage("AskForVehicleLicensePlateToPark"));
+            userInputOutput.WriteLine(messageService.GetMessage("LeaveOption", "-"));
+            licensePlate = userInputOutput.ReadLine().ToUpper().Trim();
+
+            if (string.IsNullOrEmpty(licensePlate) || licensePlate == "")
+            {
+                userInputOutput.WriteLine(messageService.GetMessage("PleaseInformTheLicensePlateCorrectly"));
+                Thread.Sleep(1500);
+            }
+            else if (licensePlate == "-")
+            {
+                userInputOutput.WriteLine(messageService.GetMessage("Returning"));
+                return;
+            }
+            else if (vehicles.Any(vehicles => vehicles == licensePlate))
+            {
+                userInputOutput.WriteLine(messageService.GetMessage("LicensePlateAlreadyParked"));
+                Thread.Sleep(1500);
+                licensePlate = null;
+            }
+        }
+        vehicles.Add(licensePlate);
+        userInputOutput.WriteLine(messageService.GetMessage("VehicleParkedSuccessfully"));
     }
 
     public void RemoveVehicle()
     {
-        Console.WriteLine("Digite a placa do veículo para remover:");
-
-        // TODO: [EN] Ask the user to enter the license plate and store it in the variable 'placa'
-        // *IMPLEMENT HERE*
-        // TODO: [PT-BR] Pedir para o usuário digitar a placa e armazenar na variável placa
-        // *IMPLEMENTE AQUI*
-        string licensePlate = "";
-
-        if (vehicles.Any(x => x.ToUpper() == licensePlate.ToUpper()))
+        string? licensePlate = null;
+        while (string.IsNullOrEmpty(licensePlate))
         {
-            Console.WriteLine("Digite a quantidade de horas que o veículo permaneceu estacionado:");
+            userInputOutput.WriteLine(messageService.GetMessage("AskForVehicleLicensePlateToRemove"));
+            licensePlate = userInputOutput.ReadLine().ToUpper().Trim();
 
-            // TODO: [EN] Ask the user to enter the number of hours the vehicle was parked,
-            // TODO: [EN] Perform the following calculation: "initialPrice + pricePerHour * hours" for the variable totalValue
-            // *IMPLEMENT HERE*
-            // TODO: [PT-BR] Pedir para o usuário digitar a quantidade de horas que o veículo permaneceu estacionado,
-            // TODO: [PT-BR] Realizar o seguinte cálculo: "initialPrice + pricePerHour * hours" para a variável valorTotal                
-            // *IMPLEMENTE AQUI*
-            int hours = 0;
-            decimal valorTotal = 0;
-
-            // TODO: [EN] Remove the entered license plate from the list of vehicles
-            // *IMPLEMENT HERE*
-            // TODO: [PT-BR] Remover a placa digitada da lista de veículos
-            // *IMPLEMENTE AQUI*
-
-            Console.WriteLine($"O veículo {licensePlate} foi removido e o preço total foi de: R$ {valorTotal}");
+            if (string.IsNullOrEmpty(licensePlate) || licensePlate == "")
+            {
+                userInputOutput.WriteLine(messageService.GetMessage("PleaseInformTheLicensePlateCorrectly"));
+                Thread.Sleep(1500);
+            }
+            else if (licensePlate == "-")
+            {
+                userInputOutput.WriteLine(messageService.GetMessage("Returning"));
+                return;
+            }
+            else if (!vehicles.Any(x => x == licensePlate.ToUpper()))
+            {
+                userInputOutput.WriteLine(messageService.GetMessage("VehicleNotFound"));
+                Thread.Sleep(1500);
+                licensePlate = null;
+            }
         }
-        else
+
+        int? hours = null;
+        while (hours == null)
         {
-            Console.WriteLine("Desculpe, esse veículo não está estacionado aqui. Confira se digitou a placa corretamente");
+            userInputOutput.WriteLine(messageService.GetMessage("AskHowManyHoursVehicleIsParked"));
+            string userInput = userInputOutput.ReadLine();
+            try
+            {
+                hours = int.Parse(userInput);
+            }
+            catch (FormatException e)
+            {
+                userInputOutput.WriteLine(messageService.GetMessage("PleaseProvideTheHoursCorrectly"));
+                hours = null;
+                continue;
+            }
         }
+        vehicles.Remove(licensePlate);
+        decimal total = this.initialPrice + (decimal)hours * this.pricePerHour;
+        userInputOutput.WriteLine(messageService.GetMessage("VehicleRemovedAndTotalatoPay", new object[] { licensePlate, total.ToString("F2") }));
     }
 
     public void ListVehicles()

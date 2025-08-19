@@ -1,6 +1,8 @@
 ﻿using System.Globalization;
 using System.Resources;
+using ParkingLot.Common;
 using ParkingLot.Common.Models;
+using ParkingLot.Common.Services;
 
 Console.OutputEncoding = System.Text.Encoding.UTF8;
 ResourceManager resourceManager = new ResourceManager("ParkingLot.Common.Resources.Messages", typeof(ParkingManager).Assembly);
@@ -8,7 +10,9 @@ CultureInfo cultureInfo = CultureInfo.InvariantCulture;
 
 bool showLanguageMenu = true;
 
-while (showLanguageMenu) {
+while (showLanguageMenu)
+{
+    Console.Clear();
     Console.WriteLine("Choose your language | Escolha o idioma:");
     Console.WriteLine("1 - Português Brasileiro");
     Console.WriteLine("2 - English");
@@ -30,18 +34,23 @@ while (showLanguageMenu) {
     }
 }
 
+MessageService messageService = new MessageService(resourceManager, cultureInfo);
+
 decimal initialPrice = 0;
 decimal pricePerHour = 0;
 
-Console.WriteLine(resourceManager.GetString("WelcomeMessage", cultureInfo));
-Console.WriteLine("Digite o preço inicial:");
+// active resource manager (keep commented originals untouched above)
+Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+Console.WriteLine(messageService.GetMessage("WelcomeMessage"));
+Console.WriteLine(messageService.GetMessage("PromptInitialPrice"));
 initialPrice = Convert.ToDecimal(Console.ReadLine());
 
-Console.WriteLine("Agora digite o preço por hora:");
+Console.WriteLine(messageService.GetMessage("PromptPricePerHour"));
 pricePerHour = Convert.ToDecimal(Console.ReadLine());
 
 // Instancia a classe Estacionamento, já com os valores obtidos anteriormente
-ParkingManager parkingManager = new ParkingManager(initialPrice, pricePerHour);
+ParkingManager parkingManager = new ParkingManager(new UserInputOutput(), messageService, initialPrice, pricePerHour);
 
 bool showMenu = true;
 
@@ -49,11 +58,11 @@ bool showMenu = true;
 while (showMenu)
 {
     Console.Clear();
-    Console.WriteLine("Digite a sua opção:");
-    Console.WriteLine("1 - Cadastrar veículo");
-    Console.WriteLine("2 - Remover veículo");
-    Console.WriteLine("3 - Listar veículos");
-    Console.WriteLine("4 - Encerrar");
+    Console.WriteLine(messageService.GetMessage("MenuPrompt"));
+    Console.WriteLine(messageService.GetMessage("MenuOptionAdd"));
+    Console.WriteLine(messageService.GetMessage("MenuOptionRemove"));
+    Console.WriteLine(messageService.GetMessage("MenuOptionList"));
+    Console.WriteLine(messageService.GetMessage("MenuOptionExit"));
 
     switch (Console.ReadLine())
     {
@@ -74,12 +83,12 @@ while (showMenu)
             break;
 
         default:
-            Console.WriteLine("Opção inválida");
+            Console.WriteLine(messageService.GetMessage("MenuInvalidOption"));
             break;
     }
 
-    Console.WriteLine("Pressione uma tecla para continuar");
+    Console.WriteLine(messageService.GetMessage("PressAnyKey"));
     Console.ReadLine();
 }
 
-Console.WriteLine("O programa se encerrou");
+Console.WriteLine(messageService.GetMessage("GoodbyeMessage"));
