@@ -64,6 +64,6 @@
     <value>Por favor forneça as horas corretamente</value>
   </data>
   <data name="VehicleRemovedAndTotalatoPay" xml:space="preserve">
-    <value>O veículo de placa {1} foi removido e o preço total foi de: R$ {2}</value>
+    <value>O veículo de placa {0} foi removido e o preço total foi de: R$ {1}</value>
   </data>
 </root>

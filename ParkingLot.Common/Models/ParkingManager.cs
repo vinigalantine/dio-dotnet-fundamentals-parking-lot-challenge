@@ -57,7 +57,7 @@ public class ParkingManager
         while (string.IsNullOrEmpty(licensePlate))
         {
             userInputOutput.WriteLine(messageService.GetMessage("AskForVehicleLicensePlateToRemove"));
-            licensePlate = userInputOutput.ReadLine();
+            licensePlate = userInputOutput.ReadLine().ToUpper().Trim();
 
             if (string.IsNullOrEmpty(licensePlate) || licensePlate == "")
             {
@@ -78,7 +78,7 @@ public class ParkingManager
         }
 
         int? hours = null;
-        while (hours != null)
+        while (hours == null)
         {
             userInputOutput.WriteLine(messageService.GetMessage("AskHowManyHoursVehicleIsParked"));
             string userInput = userInputOutput.ReadLine();
@@ -95,7 +95,7 @@ public class ParkingManager
         }
         vehicles.Remove(licensePlate);
         decimal total = this.initialPrice + (decimal)hours * this.pricePerHour;
-        userInputOutput.WriteLine(messageService.GetMessage("VehicleRemovedAndTotalatoPay"));
+        userInputOutput.WriteLine(messageService.GetMessage("VehicleRemovedAndTotalatoPay", new object[] { licensePlate, total.ToString("F2") }));
     }
 
     public void ListVehicles()

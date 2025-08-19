@@ -64,6 +64,6 @@
     <value>Please provide the hours correctly</value>
   </data>
   <data name="VehicleRemovedAndTotalatoPay" xml:space="preserve">
-    <value>The vehicle with license plate {1} has been removed and the total price was: $ {2}</value>
+    <value>The vehicle with license plate {0} has been removed and the total price was: $ {1}</value>
   </data>
 </root>
