@@ -66,4 +66,10 @@
   <data name="VehicleRemovedAndTotalatoPay" xml:space="preserve">
     <value>O veículo de placa {0} foi removido e o preço total foi de: R$ {1}</value>
   </data>
+  <data name="TheseAreTheVehiclesParkedHere" xml:space="preserve">
+    <value>Estes são os veículos estacionados aqui:</value>
+  </data>
+  <data name="NoVehiclesParkedHere" xml:space="preserve">
+    <value>Não há veiculos estacionados aqui.</value>
+  </data>
 </root>
