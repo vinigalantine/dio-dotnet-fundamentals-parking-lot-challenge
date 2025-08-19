@@ -57,4 +57,13 @@
   <data name="VehicleNotFound" xml:space="preserve">
     <value>Sorry, this vehicle is not parked here. Please check if you entered the license plate correctly.</value>
   </data>
+  <data name="AskHowManyHoursVehicleIsParked" xml:space="preserve">
+    <value>Enter the number of hours the vehicle was parked:</value>
+  </data>
+  <data name="PleaseProvideTheHoursCorrectly" xml:space="preserve">
+    <value>Please provide the hours correctly</value>
+  </data>
+  <data name="VehicleRemovedAndTotalatoPay" xml:space="preserve">
+    <value>The vehicle with license plate {1} has been removed and the total price was: $ {2}</value>
+  </data>
 </root>

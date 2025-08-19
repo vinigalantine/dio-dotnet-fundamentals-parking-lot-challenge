@@ -57,4 +57,13 @@
   <data name="VehicleNotFound" xml:space="preserve">
     <value>Desculpe, esse veículo não está estacionado aqui. Confira se digitou a placa corretamente.</value>
   </data>
+  <data name="AskHowManyHoursVehicleIsParked" xml:space="preserve">
+    <value>Informe a quantidade de horas que o veículo permaneceu estacionado:</value>
+  </data>
+  <data name="PleaseProvideTheHoursCorrectly" xml:space="preserve">
+    <value>Por favor forneça as horas corretamente</value>
+  </data>
+  <data name="VehicleRemovedAndTotalatoPay" xml:space="preserve">
+    <value>O veículo de placa {1} foi removido e o preço total foi de: R$ {2}</value>
+  </data>
 </root>

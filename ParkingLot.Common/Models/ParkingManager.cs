@@ -81,9 +81,10 @@ public class ParkingManager
         while (hours != null)
         {
             userInputOutput.WriteLine(messageService.GetMessage("AskHowManyHoursVehicleIsParked"));
+            string userInput = userInputOutput.ReadLine();
             try
             {
-                hours = int.Parse(userInputOutput.ReadLine());
+                hours = int.Parse(userInput);
             }
             catch (FormatException e)
             {
@@ -93,7 +94,7 @@ public class ParkingManager
             }
         }
         vehicles.Remove(licensePlate);
-        decimal total = this.initialPrice + (decimal) hours * this.pricePerHour;
+        decimal total = this.initialPrice + (decimal)hours * this.pricePerHour;
         userInputOutput.WriteLine(messageService.GetMessage("VehicleRemovedAndTotalatoPay"));
     }
 
