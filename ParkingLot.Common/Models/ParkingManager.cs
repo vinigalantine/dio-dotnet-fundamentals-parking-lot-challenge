@@ -82,20 +82,18 @@ public class ParkingManager
         {
             userInputOutput.WriteLine(messageService.GetMessage("AskHowManyHoursVehicleIsParked"));
             string userInput = userInputOutput.ReadLine();
-            try
-            {
-                hours = int.Parse(userInput);
-            }
-            catch (FormatException e)
+            if (!int.TryParse(userInput, out int parsedHours))
             {
                 userInputOutput.WriteLine(messageService.GetMessage("PleaseProvideTheHoursCorrectly"));
                 hours = null;
                 continue;
             }
+
+            hours = parsedHours;
         }
         vehicles.Remove(licensePlate);
-        decimal total = this.initialPrice + (decimal)hours * this.pricePerHour;
-        userInputOutput.WriteLine(messageService.GetMessage("VehicleRemovedAndTotalatoPay", new object[] { licensePlate, total.ToString("F2") }));
+    decimal total = this.initialPrice + (decimal)hours.Value * this.pricePerHour;
+    userInputOutput.WriteLine(messageService.GetMessage("VehicleRemovedAndTotalatoPay", new object[] { licensePlate, total.ToString("F2") }));
     }
 
     public void ListVehicles()

@@ -36,21 +36,51 @@ while (showLanguageMenu)
 
 MessageService messageService = new MessageService(resourceManager, cultureInfo);
 
-decimal initialPrice = 0;
-decimal pricePerHour = 0;
-
-// active resource manager (keep commented originals untouched above)
 Console.OutputEncoding = System.Text.Encoding.UTF8;
 
 Console.WriteLine(messageService.GetMessage("WelcomeMessage"));
-Console.WriteLine(messageService.GetMessage("PromptInitialPrice"));
-initialPrice = Convert.ToDecimal(Console.ReadLine());
 
-Console.WriteLine(messageService.GetMessage("PromptPricePerHour"));
-pricePerHour = Convert.ToDecimal(Console.ReadLine());
+decimal? initialPrice = null;
+while (initialPrice == null)
+{
+    Console.WriteLine(messageService.GetMessage("PromptInitialPrice"));
+    string initialPriceInput = Console.ReadLine();
+
+    // Try parsing using the selected culture first, then fall back to en-US so users can enter either ',' or '.'
+    if (!decimal.TryParse(initialPriceInput, System.Globalization.NumberStyles.Number, cultureInfo, out decimal parsedInitialPrice))
+    {
+        if (!decimal.TryParse(initialPriceInput, System.Globalization.NumberStyles.Number, CultureInfo.GetCultureInfo("en-US"), out parsedInitialPrice))
+        {
+            Console.WriteLine(messageService.GetMessage("PleaseProvideTheInitialPriceCorrectly"));
+            initialPrice = null;
+            continue;
+        }
+    }
+
+    initialPrice = parsedInitialPrice;
+}
+
+decimal? pricePerHour = null;
+while (pricePerHour == null)
+{
+    Console.WriteLine(messageService.GetMessage("PromptPricePerHour"));
+    string pricePerHourInput = Console.ReadLine();
+
+    if (!decimal.TryParse(pricePerHourInput, System.Globalization.NumberStyles.Number, cultureInfo, out decimal parsedPricePerHour))
+    {
+        if (!decimal.TryParse(pricePerHourInput, System.Globalization.NumberStyles.Number, CultureInfo.GetCultureInfo("en-US"), out parsedPricePerHour))
+        {
+            Console.WriteLine(messageService.GetMessage("PleaseProvideTheHoursCorrectly"));
+            pricePerHour = null;
+            continue;
+        }
+    }
+
+    pricePerHour = parsedPricePerHour;
+}
 
 // Instancia a classe Estacionamento, já com os valores obtidos anteriormente
-ParkingManager parkingManager = new ParkingManager(new UserInputOutput(), messageService, initialPrice, pricePerHour);
+ParkingManager parkingManager = new ParkingManager(new UserInputOutput(), messageService, initialPrice.Value, pricePerHour.Value);
 
 bool showMenu = true;
 

@@ -72,4 +72,10 @@
   <data name="NoVehiclesParkedHere" xml:space="preserve">
     <value>There are no vehicles parked here.</value>
   </data>
+  <data name="PleaseProvideTheInitialPriceCorrectly" xml:space="preserve">
+    <value>Please provide the initial price correctly</value>
+  </data>
+  <data name="PleaseProvideThePerHourCorrectly" xml:space="preserve">
+    <value>Please provide the price per hour correctly</value>
+  </data>
 </root>
