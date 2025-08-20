@@ -92,6 +92,7 @@ while (showMenu)
     Console.WriteLine(messageService.GetMessage("MenuOptionAdd"));
     Console.WriteLine(messageService.GetMessage("MenuOptionRemove"));
     Console.WriteLine(messageService.GetMessage("MenuOptionList"));
+    Console.WriteLine(messageService.GetMessage("MenuOptionPrices"));
     Console.WriteLine(messageService.GetMessage("MenuOptionExit"));
 
     switch (Console.ReadLine())
@@ -109,6 +110,10 @@ while (showMenu)
             break;
 
         case "4":
+            parkingManager.ShowPrices();
+            break;
+
+        case "5":
             showMenu = false;
             break;
 

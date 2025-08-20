@@ -57,6 +57,7 @@ public class ParkingManager
         while (string.IsNullOrEmpty(licensePlate))
         {
             userInputOutput.WriteLine(messageService.GetMessage("AskForVehicleLicensePlateToRemove"));
+            userInputOutput.WriteLine(messageService.GetMessage("LeaveOption", "-"));
             licensePlate = userInputOutput.ReadLine().ToUpper().Trim();
 
             if (string.IsNullOrEmpty(licensePlate) || licensePlate == "")
@@ -109,6 +110,12 @@ public class ParkingManager
         {
             userInputOutput.WriteLine("NoVehiclesParkedHere");
         }
+    }
+
+    public void ShowPrices()
+    {
+        userInputOutput.WriteLine(messageService.GetMessage("InitialPrice", this.initialPrice.ToString("F2")));
+        userInputOutput.WriteLine(messageService.GetMessage("PricePerHour", this.pricePerHour.ToString("F2")));
     }
 }
 
