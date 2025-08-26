@@ -1,18 +1,17 @@
 using ParkingLot.Common.Interfaces;
-using ParkingLot.Common.Services;
 
 namespace ParkingLot.Common.Models;
 
-public class ParkingManager
+public class ParkingManager : IParkingManager
 {
     private IUserInputOutput userInputOutput;
 
-    private readonly MessageService messageService;
+    private readonly IMessageService messageService;
     private decimal initialPrice = 0;
     private decimal pricePerHour = 0;
     private List<string> vehicles = new List<string>();
 
-    public ParkingManager(IUserInputOutput userInputOutput, MessageService messageService, decimal initialPrice, decimal pricePerHour)
+    public ParkingManager(IUserInputOutput userInputOutput, IMessageService messageService, decimal initialPrice, decimal pricePerHour)
     {
         this.userInputOutput = userInputOutput;
         this.messageService = messageService;
@@ -25,7 +24,7 @@ public class ParkingManager
         string? licensePlate = null;
         while (string.IsNullOrEmpty(licensePlate))
         {
-            Console.Clear();
+            userInputOutput.Clear();
             userInputOutput.WriteLine(messageService.GetMessage("AskForVehicleLicensePlateToPark"));
             userInputOutput.WriteLine(messageService.GetMessage("LeaveOption", "-"));
             licensePlate = userInputOutput.ReadLine().ToUpper().Trim();
@@ -53,10 +52,16 @@ public class ParkingManager
 
     public void RemoveVehicle()
     {
+        if (!vehicles.Any()) {
+            userInputOutput.WriteLine(messageService.GetMessage("NoVehiclesParkedHere"));
+            return;
+        }
+
         string? licensePlate = null;
         while (string.IsNullOrEmpty(licensePlate))
         {
             userInputOutput.WriteLine(messageService.GetMessage("AskForVehicleLicensePlateToRemove"));
+            userInputOutput.WriteLine(messageService.GetMessage("LeaveOption", "-"));
             licensePlate = userInputOutput.ReadLine().ToUpper().Trim();
 
             if (string.IsNullOrEmpty(licensePlate) || licensePlate == "")
@@ -82,19 +87,17 @@ public class ParkingManager
         {
             userInputOutput.WriteLine(messageService.GetMessage("AskHowManyHoursVehicleIsParked"));
             string userInput = userInputOutput.ReadLine();
-            try
-            {
-                hours = int.Parse(userInput);
-            }
-            catch (FormatException e)
+            if (!int.TryParse(userInput, out int parsedHours))
             {
                 userInputOutput.WriteLine(messageService.GetMessage("PleaseProvideTheHoursCorrectly"));
                 hours = null;
                 continue;
             }
+
+            hours = parsedHours;
         }
         vehicles.Remove(licensePlate);
-        decimal total = this.initialPrice + (decimal)hours * this.pricePerHour;
+        decimal total = this.initialPrice + (decimal)hours.Value * this.pricePerHour;
         userInputOutput.WriteLine(messageService.GetMessage("VehicleRemovedAndTotalatoPay", new object[] { licensePlate, total.ToString("F2") }));
     }
 
@@ -102,15 +105,22 @@ public class ParkingManager
     {
         if (vehicles.Any())
         {
-            userInputOutput.WriteLine("TheseAreTheVehiclesParkedHere");
-            foreach(string vehicle in this.vehicles){
+            userInputOutput.WriteLine(messageService.GetMessage("TheseAreTheVehiclesParkedHere"));
+            foreach (string vehicle in this.vehicles)
+            {
                 userInputOutput.WriteLine(vehicle);
             }
         }
         else
         {
-            userInputOutput.WriteLine("NoVehiclesParkedHere");
+            userInputOutput.WriteLine(messageService.GetMessage("NoVehiclesParkedHere"));
         }
+    }
+
+    public void ShowPrices()
+    {
+        userInputOutput.WriteLine(messageService.GetMessage("InitialPrice", this.initialPrice.ToString("F2")));
+        userInputOutput.WriteLine(messageService.GetMessage("PricePerHour", this.pricePerHour.ToString("F2")));
     }
 }
 

@@ -6,8 +6,14 @@
   <data name="PromptInitialPrice" xml:space="preserve">
     <value>Enter the initial price:</value>
   </data>
+  <data name="InitialPrice" xml:space="preserve">
+    <value>Initial price: $ {0}</value>
+  </data>
   <data name="PromptPricePerHour" xml:space="preserve">
     <value>Now enter the price per hour:</value>
+  </data>
+  <data name="PricePerHour" xml:space="preserve">
+    <value>Price per hour: $ {0}</value>
   </data>
   <data name="MenuPrompt" xml:space="preserve">
     <value>Enter your option:</value>
@@ -21,8 +27,11 @@
   <data name="MenuOptionList" xml:space="preserve">
     <value>3 - List vehicles</value>
   </data>
+  <data name="MenuOptionPrices" xml:space="preserve">
+    <value>4 - List prices</value>
+  </data>
   <data name="MenuOptionExit" xml:space="preserve">
-    <value>4 - Exit</value>
+    <value>5 - Exit</value>
   </data>
   <data name="MenuInvalidOption" xml:space="preserve">
     <value>Invalid option</value>
@@ -71,5 +80,11 @@
   </data>
   <data name="NoVehiclesParkedHere" xml:space="preserve">
     <value>There are no vehicles parked here.</value>
+  </data>
+  <data name="PleaseProvideTheInitialPriceCorrectly" xml:space="preserve">
+    <value>Please provide the initial price correctly</value>
+  </data>
+  <data name="PleaseProvideThePerHourCorrectly" xml:space="preserve">
+    <value>Please provide the price per hour correctly</value>
   </data>
 </root>

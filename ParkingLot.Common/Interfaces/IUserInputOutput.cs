@@ -4,4 +4,5 @@ public interface IUserInputOutput
 {
     void WriteLine(string message);
     string? ReadLine();
+    void Clear();
 }
