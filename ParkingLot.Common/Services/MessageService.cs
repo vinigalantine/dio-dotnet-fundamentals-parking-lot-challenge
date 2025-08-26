@@ -1,12 +1,14 @@
 using System.Globalization;
 using System.Resources;
+using ParkingLot.Common.Interfaces;
 
 namespace ParkingLot.Common.Services;
 
-public class MessageService
+public class MessageService : IMessageService
 {
-    private ResourceManager resourceManager;
-    private CultureInfo cultureInfo;
+    private readonly ResourceManager resourceManager;
+    private readonly CultureInfo cultureInfo;
+    public CultureInfo CultureInfo => this.cultureInfo;
 
     public MessageService(ResourceManager resourceManager, CultureInfo cultureInfo)
     {

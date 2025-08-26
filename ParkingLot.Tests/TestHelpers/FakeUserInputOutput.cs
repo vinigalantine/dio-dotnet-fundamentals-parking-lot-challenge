@@ -45,4 +45,9 @@ public class FakeUserInputOutput : IUserInputOutput
     {
         lock (_lock) { _outputs.Clear(); }
     }
+
+    public void Clear()
+    {
+        lock (_lock) { _outputs.Add("Console Cleared"); };
+    }
 }
