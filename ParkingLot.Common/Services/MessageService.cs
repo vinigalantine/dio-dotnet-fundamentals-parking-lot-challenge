@@ -18,11 +18,19 @@ public class MessageService : IMessageService
 
     public string? GetMessage(string messageId)
     {
-        return resourceManager.GetString(messageId, cultureInfo);
+        string? message = resourceManager.GetString(messageId, cultureInfo);
+
+        if (string.IsNullOrEmpty(message))
+            return messageId;
+
+        return message;
     }
     public string? GetMessage(string messageId, string? arg)
     {
-        string message = resourceManager.GetString(messageId, cultureInfo);
+        string? message = resourceManager.GetString(messageId, cultureInfo);
+
+        if (string.IsNullOrEmpty(message))
+            return messageId;
 
         if (string.IsNullOrEmpty(arg))
             return message;
@@ -31,11 +39,19 @@ public class MessageService : IMessageService
     }
     public string? GetMessage(string messageId, object[] args)
     {
-        string message = resourceManager.GetString(messageId, cultureInfo);
+        string? message = resourceManager.GetString(messageId, cultureInfo);
+
+        if (string.IsNullOrEmpty(message))
+            return messageId;
 
         if (args.Length == 0)
             return message;
 
         return string.Format(message, args);    
+    }
+
+    public string GetCurrencyFormatted(decimal value)
+    {
+        return value.ToString("C", cultureInfo);
     }
 }

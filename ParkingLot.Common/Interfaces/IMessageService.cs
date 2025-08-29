@@ -9,4 +9,5 @@ public interface IMessageService
     string? GetMessage(string messageId);
     string? GetMessage(string messageId, string? arg);
     string? GetMessage(string messageId, object[] args);
+    string GetCurrencyFormatted(decimal value);
 }

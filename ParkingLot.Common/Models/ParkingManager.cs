@@ -98,7 +98,7 @@ public class ParkingManager : IParkingManager
         }
         vehicles.Remove(licensePlate);
         decimal total = this.initialPrice + (decimal)hours.Value * this.pricePerHour;
-        userInputOutput.WriteLine(messageService.GetMessage("VehicleRemovedAndTotalatoPay", new object[] { licensePlate, total.ToString("F2") }));
+        userInputOutput.WriteLine(messageService.GetMessage("VehicleRemovedAndTotalatoPay", new object[] { licensePlate, messageService.GetCurrencyFormatted( total ) }));
     }
 
     public void ListVehicles()
@@ -119,8 +119,8 @@ public class ParkingManager : IParkingManager
 
     public void ShowPrices()
     {
-        userInputOutput.WriteLine(messageService.GetMessage("InitialPrice", this.initialPrice.ToString("F2")));
-        userInputOutput.WriteLine(messageService.GetMessage("PricePerHour", this.pricePerHour.ToString("F2")));
+        userInputOutput.WriteLine(messageService.GetMessage("InitialPrice", messageService.GetCurrencyFormatted(initialPrice)));
+        userInputOutput.WriteLine(messageService.GetMessage("PricePerHour", messageService.GetCurrencyFormatted(pricePerHour)));
     }
 }
 

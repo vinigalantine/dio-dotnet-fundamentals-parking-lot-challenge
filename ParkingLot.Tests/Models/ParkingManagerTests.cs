@@ -90,6 +90,7 @@ public class ParkingManagerTests
         ParkingManager parkingManager = new ParkingManager(fakeUserInputOutput, messageService, initialPrice, pricePerHour);
 
         decimal expectedTotal = initialPrice + hours * pricePerHour;
+
         List<string> expectedOutput = [
             consoleCleared,
             messageService.GetMessage("AskForVehicleLicensePlateToPark"),
@@ -98,7 +99,7 @@ public class ParkingManagerTests
             messageService.GetMessage("AskForVehicleLicensePlateToRemove"),
             messageService.GetMessage("LeaveOption", "-"),
             messageService.GetMessage("AskHowManyHoursVehicleIsParked"),
-            messageService.GetMessage("VehicleRemovedAndTotalatoPay", new object[] { licensePlate, expectedTotal.ToString("F2") })
+            messageService.GetMessage("VehicleRemovedAndTotalatoPay", new object[] { licensePlate, messageService.GetCurrencyFormatted(expectedTotal) })
         ];
 
         parkingManager.AddVehicle();
@@ -224,8 +225,8 @@ public class ParkingManagerTests
         MessageService messageService = new MessageService(this.resourceManager, CultureInfo.InvariantCulture);
         ParkingManager parkingManager = new ParkingManager(fakeUserInputOutput, messageService, initialPrice, pricePerHour);
         List<string> expectedOutput = [
-            messageService.GetMessage("InitialPrice", initialPrice.ToString("F2")),
-            messageService.GetMessage("PricePerHour", pricePerHour.ToString("F2"))
+            messageService.GetMessage("InitialPrice", messageService.GetCurrencyFormatted(initialPrice)),
+            messageService.GetMessage("PricePerHour", messageService.GetCurrencyFormatted(pricePerHour))
         ];
 
         parkingManager.ShowPrices();

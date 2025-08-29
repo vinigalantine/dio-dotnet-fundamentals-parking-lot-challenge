@@ -72,12 +72,12 @@ public class MessageServiceTests
 	}
 
 	[Fact]
-	public void GetMessage_MissingKey_ReturnsNull()
+	public void GetMessage_MissingKey_ReturnsKey()
 	{
 		var service = new MessageService(resourceManager, CultureInfo.InvariantCulture);
 
 		var actual = service.GetMessage("ThisKeyDoesNotExist");
 
-		Assert.Null(actual);
+		Assert.Equal("ThisKeyDoesNotExist", actual);
 	}
 }
